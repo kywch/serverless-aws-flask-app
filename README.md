@@ -130,7 +130,7 @@ If you try to retrieve user that does not exist, you should receive the followin
 {"error":"Could not find user with provided \"userId\""}
 ```
 
-### Local development
+# Local development
 
 Thanks to capabilities of `serverless-wsgi`, it is also possible to run your application locally, however, in order to do that, you will need to first install `werkzeug`, `boto3` dependencies, as well as all other dependencies listed in `requirements.txt`. It is recommended to use a dedicated virtual environment for that purpose. You can install all needed dependencies with the following commands:
 
@@ -171,10 +171,13 @@ dynamodb_client = boto3.client('dynamodb')
 with
 
 ```python
-dynamodb_client = boto3.client('dynamodb')
-
 if os.environ.get('IS_OFFLINE'):
-    dynamodb_client = boto3.client('dynamodb', region_name='localhost', endpoint_url='http://localhost:8000')
+    dynamodb_client = boto3.client(
+        'dynamodb', region_name='localhost', endpoint_url='http://localhost:8000',
+        aws_access_key_id='DEFAULT_ACCESS_KEY', aws_secret_access_key='DEFAULT_SECRET'
+    )
+else:
+    dynamodb_client = boto3.client('dynamodb')
 ```
 
 Now you can start DynamoDB local with the following command:
@@ -193,7 +196,7 @@ For additional local development capabilities of `serverless-wsgi` and `serverle
 - https://github.com/logandk/serverless-wsgi 
 - https://github.com/99x/serverless-dynamodb-local
 
-#### Invocation from local
+### Checking API from local
 
 After successful local deployment, you can create a new user by calling the corresponding endpoint:
 
