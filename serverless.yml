@@ -6,6 +6,11 @@ custom:
   tableName: 'users-table-${self:provider.stage}'
   wsgi:
     app: app.app
+  dynamodb:
+    start:
+      migrate: true
+    stages:
+      - dev
 
 provider:
   name: aws
@@ -42,7 +47,7 @@ functions:
 plugins:
   - serverless-wsgi
   - serverless-python-requirements
-
+  - serverless-dynamodb-local
 resources:
   Resources:
     UsersTable:

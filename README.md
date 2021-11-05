@@ -192,3 +192,17 @@ serverless wsgi serve
 For additional local development capabilities of `serverless-wsgi` and `serverless-dynamodb-local` plugins, please refer to corresponding GitHub repositories:
 - https://github.com/logandk/serverless-wsgi 
 - https://github.com/99x/serverless-dynamodb-local
+
+#### Invocation from local
+
+After successful local deployment, you can create a new user by calling the corresponding endpoint:
+
+```bash
+curl --request POST 'http://localhost:5000/users' --header 'Content-Type: application/json' --data-raw '{"name": "John", "userId": "someUserId"}'
+```
+
+You can later retrieve the user by `userId` by calling the following endpoint:
+
+```bash
+curl http://localhost:5000/users/someUserId
+```

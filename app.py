@@ -6,12 +6,13 @@ from flask import Flask, jsonify, make_response, request
 app = Flask(__name__)
 
 
-dynamodb_client = boto3.client('dynamodb')
-
 if os.environ.get('IS_OFFLINE'):
     dynamodb_client = boto3.client(
-        'dynamodb', region_name='localhost', endpoint_url='http://localhost:8000'
+        'dynamodb', region_name='localhost', endpoint_url='http://localhost:8000',
+        aws_access_key_id='DEFAULT_ACCESS_KEY', aws_secret_access_key='DEFAULT_SECRET'
     )
+else:
+    dynamodb_client = boto3.client('dynamodb')
 
 
 USERS_TABLE = os.environ['USERS_TABLE']
