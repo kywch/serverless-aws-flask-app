@@ -24,6 +24,12 @@ Additionally, the template also handles provisioning of a DynamoDB database that
 
 ## Usage
 
+### Install serverless
+
+```base
+npm install -g serverless
+```
+
 ### Prerequisites
 
 In order to package your dependencies locally with `serverless-python-requirements`, you need to have `Python3.8` installed locally. You can create and activate a dedicated virtual environment with the following command:
